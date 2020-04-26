@@ -34,6 +34,68 @@ function del(empid){
 	});
 }
 
+//全选
+function qx() {
+	$("[name='ck']").prop("checked",true);
+}
+//全不选
+function qbx() {
+	$("[name='ck']").prop("checked",false);
+}
+//反选
+function fx() {
+	$("[name='ck']").each(function(){
+		this.checked = !this.checked;
+	})
+}
+
+// function plsc(){
+// 	//jquery dom [checkbox]
+// 	//[] 数组
+// 	var ids=[];//
+// 	//<input type="checkbox" name="ck" value="${m.empid }" />
+// 	$("input[type='checkbox']:checked").each(function(i,dom){//把页面选中的元素的id放到数组中
+// 		//alert($(dom).val());
+// 		ids.push($(dom).val());
+// 	});
+// 	//alert(ids);
+	
+// 	$.ajax({
+// 		url: "plsc?ids="+ids,
+// 		data: "",
+// 		success: function(res){
+// 			//alert(res);
+// 			if(res=="success"){
+// 				location="list";
+// 			}
+// 		}
+// 	});
+// }
+
+//plsc
+function plsc(){
+	var ids=[];
+	//<input type="checkbox" name="ck" value="${m.empid }" />
+	$("input[type='checkbox']:checked").each(function(i,dom){
+		//alert($(dom).val());
+		ids.push($(dom).val());
+	});
+	$.ajax({
+		url: "plsc?ids="+ids,
+		data: "",
+		success: function(res){
+// 			alert(res);
+			if(res=="success"){
+				location="list";
+			}
+		}
+	});//axios
+}
+
+function update(empid){
+	location="toUpdate?empid="+empid;
+}
+
 </script>
 </head>
 <body>
@@ -76,10 +138,21 @@ function del(empid){
 	<td>${m.sex }</td>
 	<td>${m.birth }</td>
 	<td><input type="button" value="del"  onclick="del(${m.empid})" /> </td>
+	<td><input type="button" value="update"  onclick="update(${m.empid})" /> </td>
 </tr>
 </c:forEach>
 <tr>
 <td colspan="13"> ${fenye } </td>
+</tr>
+<tr>
+<td colspan="13">
+	<input type="button" value="qx" onclick="qx()" />
+	<input type="button" value="fx" onclick="fx()" />
+	<input type="button" value="qbx" onclick="qbx()" />
+	
+	<input type="button" value="plsc" onclick="plsc()" />
+	
+</td>
 </tr>
 </table>
 

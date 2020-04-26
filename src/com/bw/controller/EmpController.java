@@ -80,6 +80,32 @@ public class EmpController {
 		return "success";
 	}
 	
+	@RequestMapping("plsc")
+	@ResponseBody
+	public String plsc(Integer[] ids){
+		for (Integer empid : ids) {
+			this.del(empid);
+		}
+		
+		return "success";
+	}
+	
+	@RequestMapping("toUpdate")
+	public String toUpdate(){
+		return "update";
+	}
+	
+	@RequestMapping("getEmpById")
+	@ResponseBody
+	public Emp getEmpById(Integer empid){
+		Emp emp = empMapper.selectEmpById(empid);
+		return emp;
+	}
+	
+	
+	
+	
+	
 	
 	
 	
